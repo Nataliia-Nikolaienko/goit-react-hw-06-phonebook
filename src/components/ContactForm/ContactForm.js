@@ -1,36 +1,25 @@
 import { useState } from 'react';
-// import { initialState } from 'components/store/contacts/initialState';
+import initialState from '../initialState';
 import css from '../ContactForm.module.css';
 
 const ContactForm = ({ addContact }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  // const [state, setState] = useState({...initialState})
+  const [state, setState] = useState({ ...initialState });
 
   const handleSubmit = e => {
     e.preventDefault();
     addContact({ name, number });
-    setName('');
-    setNumber('');
+    setState({ ...initialState });
     e.target.reset();
   };
 
   const handleChange = e => {
-    const { name, value } = e.target;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-
-      case 'number':
-        setNumber(value);
-        break;
-
-      default:
-        return;
-    }
+    const { value, name } = e.target;
+    setState(prevState => {
+      return { ...prevState, [name]: value };
+    });
   };
 
+  const { name, number } = state;
   return (
     <form onSubmit={handleSubmit} className={css.form}>
       <div className={css.nameInputContainer}>

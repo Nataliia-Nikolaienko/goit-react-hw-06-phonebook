@@ -6,7 +6,12 @@ const contactsSlice = createSlice({
   reducers: {
     addContactAction: {
       prepare: contacts => {
-        return { payload: { ...contacts, id: nanoid() } };
+        return {
+          payload: {
+            ...contacts,
+            id: nanoid(),
+          },
+        };
       },
       reducer: (state, action) => {
         return { ...state, contacts: [...state.contacts, action.payload] };
