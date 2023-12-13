@@ -3,6 +3,7 @@ import css from '../ContactForm.module.css';
 import { deleteContactAction } from '../../redux/contacts/contactsSlice';
 
 const Contact = ({ contact }) => {
+  // const { contacts } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
   const deleteContact = id => {
     dispatch(deleteContactAction(id));

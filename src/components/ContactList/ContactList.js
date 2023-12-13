@@ -1,36 +1,24 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Contact from '../Contact/Contact';
 import css from '../ContactForm.module.css';
-import ContactForm from 'components/ContactForm/ContactForm';
-import { addContactAction } from '../../redux/contacts/contactsSlice';
+import { getFilteredContacts } from '../../redux/contacts/contactsSelectors';
+import { getFilter } from '../../redux/filter/filterSelectors';
 
-const ContactList = () => {
-  const { contacts } = useSelector(state => state.contacts);
-
-  const dispatch = useDispatch();
-
-  const addContact = ({ name, number }) => {
-    const nameContact = contacts.find(contact => contact.name === name);
-    const numberContact = contacts.find(contact => contact.number === number);
-    if (nameContact) {
-      return alert(`${name} is already in contacts.`);
-    } else if (numberContact) {
-      return alert(`${number} is already in contacts.`);
-    } else {
-      dispatch(addContactAction({ name, number }));
-    }
-  };
-
+const ContactList = ({ contacts }) => {
+  // const { contacts } = useSelector(state => state.contacts);
+  const filter = useSelector(getFilter);
+  // const dispatch = useDispatch();
+  const filteredContacts = getFilteredContacts({ contacts, filter });
+  // console.log('contacts', contacts);
   return (
     <>
       <div className={css.formWrapper}>
         <h1 className={css.phonebookTitle}>Phonebook</h1>
-        <ContactForm addContact={addContact} />
       </div>
       <div className={css.contactsWrapper}>
         <h2 className={css.contactsTitle}>Contacts</h2>
         <ul className={css.todoList}>
-          {contacts.map(contact => (
+          {filteredContacts.map(contact => (
             <Contact key={contact.id} contact={contact} />
           ))}
         </ul>
