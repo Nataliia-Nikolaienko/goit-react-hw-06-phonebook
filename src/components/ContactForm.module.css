@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 500px;
 }
 
 .formWrapper {
-  min-height: 500px;
+  max-width: 500px;
+  margin-bottom: 20px;
 }
 
 .phonebookTitle {
@@ -40,12 +40,18 @@
 
 .filterContainer {
   text-align: center;
-  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+}
+
+.labelFilter {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .filterInput {
   min-width: 80%;
-  margin-bottom: 20px;
   min-height: 20px;
   border-radius: 10px;
   padding: 5px;
@@ -69,6 +75,11 @@
   color: white;
   border-radius: 10px;
   background-color: rgb(87, 187, 74);
+}
+
+.btnCreate:hover,
+.btnCreate:focus {
+  background-color: rgb(49, 100, 42);
 }
 
 .todoList {
@@ -109,4 +120,9 @@
   background-color: rgb(223, 40, 77);
   border: none;
   border-radius: 10px;
+}
+
+.btnDelete:hover,
+.btnDelete:focus {
+  background-color: rgb(161, 11, 41);
 }

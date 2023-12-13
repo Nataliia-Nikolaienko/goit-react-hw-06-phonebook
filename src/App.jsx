@@ -6,8 +6,6 @@ import { getFilteredContacts } from './redux/contacts/contactsSelectors';
 import { setFilter } from './redux/filter/filterSlice';
 import { getFilter } from './redux/filter/filterSelectors';
 
-import css from './components/ContactForm.module.css';
-
 const App = () => {
   const contacts = useSelector(getFilteredContacts);
   const filter = useSelector(getFilter);
@@ -17,23 +15,27 @@ const App = () => {
     <div
       style={{
         height: '100vh',
-        maxWidth: '1000px',
+        maxWidth: '1200px',
         display: 'flex',
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
+        // flexWrap: 'wrap',
+        gap: '20px',
         fontSize: 40,
         color: '#010101',
+        padding: '40px',
         marginLeft: 'auto',
         marginRight: 'auto',
       }}
     >
-      <ContactForm />
-      <ContactList contacts={contacts} />
-      <div className={css.filterContainer}>
+      <div>
+        <ContactForm />
         <Filter
           value={filter}
           onChange={({ target }) => dispatch(setFilter(target.value))}
         />
       </div>
+
+      <ContactList contacts={contacts} />
     </div>
   );
 };
