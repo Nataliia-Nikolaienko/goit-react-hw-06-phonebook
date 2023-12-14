@@ -5,11 +5,10 @@ import { addContactAction } from '../../redux/contactsSlice';
 import css from '../ContactForm.module.css';
 
 const ContactForm = () => {
-  const { contacts } = useSelector(state => state.contacts.contacts);
+  const contacts = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  // console.log('contacts', contacts);
 
   const addContact = ({ name, number }) => {
     const nameContact = contacts.find(contact => contact.name === name);
@@ -28,7 +27,6 @@ const ContactForm = () => {
     addContact({ name, number });
     setName('');
     setNumber('');
-    // e.target.reset();
   };
 
   const handleChange = ({ target: { value, name } }) => {

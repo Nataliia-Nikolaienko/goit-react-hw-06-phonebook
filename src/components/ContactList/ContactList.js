@@ -3,9 +3,9 @@ import Contact from '../Contact/Contact';
 import css from '../ContactForm.module.css';
 
 const ContactList = () => {
-  const { contacts } = useSelector(state => state.contacts.contacts);
-  const { filter } = useSelector(state => state.filter.filter);
-  console.log('contacts', contacts);
+  const contacts = useSelector(state => state.contacts.contacts);
+  const filter = useSelector(state => state.filter.filter);
+
   const filterContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
@@ -15,8 +15,8 @@ const ContactList = () => {
       <div className={css.contactsWrapper}>
         <h2 className={css.contactsTitle}>Contacts</h2>
         <ul className={css.todoList}>
-          {filterContacts.map(({ name, id, number }) => {
-            return <Contact key={id} name={name} number={number} />;
+          {filterContacts.map(contact => {
+            return <Contact key={contact.id} contact={contact} />;
           })}
         </ul>
       </div>

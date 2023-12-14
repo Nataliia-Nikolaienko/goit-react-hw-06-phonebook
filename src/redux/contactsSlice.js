@@ -20,31 +20,24 @@ const contactsSlice = createSlice({
       reducer: (state, action) => {
         state.contacts.push(action.payload);
       },
-      // reducer: (state, action) => {
-      //   return { ...state, contacts: [...state.contacts, action.payload] };
-      // },
     },
     deleteContactAction: (state, action) => {
-      state.contacts = state.contacts.filter(
-        contact => contact.id !== action.payload
-      );
-      // return {
-      //   ...state,
-      //   contacts: state.contacts.filter(
-      //     contact => contact.id !== action.payload
-      //   ),
-      // };
+      // state.contacts = state.contacts.filter(
+      //   contact => contact.id !== action.payload
+      // );
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          contact => contact.id !== action.payload
+        ),
+      };
     },
-    // setFilter: (state, action) => {
-    //   state.filter = action.payload;
-    // },
   },
 });
 
 const persistConfig = {
   key: 'contacts',
   storage,
-  // whitelist: ['contacts'],
 };
 export const contactsReducer = persistReducer(
   persistConfig,
