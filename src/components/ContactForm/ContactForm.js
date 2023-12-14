@@ -5,10 +5,11 @@ import { addContactAction } from '../../redux/contactsSlice';
 import css from '../ContactForm.module.css';
 
 const ContactForm = () => {
-  const { contacts } = useSelector(state => state.contacts);
+  const { contacts } = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  // console.log('contacts', contacts);
 
   const addContact = ({ name, number }) => {
     const nameContact = contacts.find(contact => contact.name === name);
@@ -51,7 +52,7 @@ const ContactForm = () => {
             className={css.input}
             name="name"
             type="text"
-            value={contacts.name}
+            value={name}
             onChange={handleChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             required
@@ -66,7 +67,7 @@ const ContactForm = () => {
             name="number"
             type="tel"
             id="exampleInputTel"
-            value={contacts.number}
+            value={number}
             onChange={handleChange}
             pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
             required

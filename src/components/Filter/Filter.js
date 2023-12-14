@@ -3,7 +3,7 @@ import { setFilter } from '../../redux/filterSlice';
 import css from '../ContactForm.module.css';
 
 const Filter = () => {
-  const { filter } = useSelector(state => state.filter);
+  const { filter } = useSelector(state => state.filter.filter);
   const dispatch = useDispatch();
 
   return (

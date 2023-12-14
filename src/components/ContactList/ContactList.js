@@ -3,14 +3,13 @@ import Contact from '../Contact/Contact';
 import css from '../ContactForm.module.css';
 
 const ContactList = () => {
-  const { contacts } = useSelector(state => state.contacts);
-  const { filter } = useSelector(state => state.filter);
-
+  const { contacts } = useSelector(state => state.contacts.contacts);
+  const { filter } = useSelector(state => state.filter.filter);
+  console.log('contacts', contacts);
   const filterContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
-  console.log('contacts', contacts);
   return (
     <>
       <div className={css.contactsWrapper}>
