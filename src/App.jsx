@@ -1,16 +1,8 @@
-import { useSelector, useDispatch } from 'react-redux';
 import ContactList from './components/ContactList/ContactList';
 import Filter from './components/Filter/Filter';
 import ContactForm from 'components/ContactForm/ContactForm';
-import { getFilteredContacts } from './redux/contacts/contactsSelectors';
-import { setFilter } from './redux/filter/filterSlice';
-import { getFilter } from './redux/filter/filterSelectors';
 
 const App = () => {
-  const contacts = useSelector(getFilteredContacts);
-  const filter = useSelector(getFilter);
-  const dispatch = useDispatch();
-
   return (
     <div
       style={{
@@ -18,7 +10,6 @@ const App = () => {
         maxWidth: '1200px',
         display: 'flex',
         justifyContent: 'center',
-        // flexWrap: 'wrap',
         gap: '20px',
         fontSize: 40,
         color: '#010101',
@@ -29,13 +20,9 @@ const App = () => {
     >
       <div>
         <ContactForm />
-        <Filter
-          value={filter}
-          onChange={({ target }) => dispatch(setFilter(target.value))}
-        />
+        <Filter />
       </div>
-
-      <ContactList contacts={contacts} />
+      <ContactList />
     </div>
   );
 };

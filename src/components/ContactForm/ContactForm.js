@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import initialState from '../initialState';
-import { addContactAction } from '../../redux/contacts/contactsSlice';
+import { addContactAction } from '../../redux/contactsSlice';
 
 import css from '../ContactForm.module.css';
 
 const ContactForm = () => {
-  const [state, setState] = useState({ ...initialState });
+  const { contacts } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
-
-  const contacts = useSelector(state => state.contacts);
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
   const addContact = ({ name, number }) => {
     const nameContact = contacts.find(contact => contact.name === name);
@@ -26,17 +25,19 @@ const ContactForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     addContact({ name, number });
-    e.target.reset();
+    setName('');
+    setNumber('');
+    // e.target.reset();
   };
 
-  const handleChange = e => {
-    const { value, name } = e.target;
-    setState(prevState => {
-      return { ...prevState, [name]: value };
-    });
+  const handleChange = ({ target: { value, name } }) => {
+    if (name === 'name') {
+      setName(value);
+    } else if (name === 'number') {
+      setNumber(value);
+    }
   };
 
-  const { name, number } = state;
   return (
     <div className={css.formWrapper}>
       <h1 className={css.phonebookTitle}>Phonebook</h1>
@@ -50,7 +51,7 @@ const ContactForm = () => {
             className={css.input}
             name="name"
             type="text"
-            value={name}
+            value={contacts.name}
             onChange={handleChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             required
@@ -65,7 +66,7 @@ const ContactForm = () => {
             name="number"
             type="tel"
             id="exampleInputTel"
-            value={number}
+            value={contacts.number}
             onChange={handleChange}
             pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
             required
